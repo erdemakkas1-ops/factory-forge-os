@@ -130,7 +130,7 @@ export function GlobalSearch() {
           {data?.people.length ? (
             <CommandGroup heading="Personel">
               {data.people.map((r) => (
-                <CommandItem key={r.id} value={r.id} onSelect={() => go(r.to)}>
+                <CommandItem key={r.id} value={`${r.label} ${r.hint} ${r.id}`} onSelect={() => go(r.to)}>
                   <span>{r.label}</span>
                   <span className="ml-auto text-xs text-muted-foreground">{r.hint}</span>
                 </CommandItem>
@@ -141,7 +141,7 @@ export function GlobalSearch() {
           {data?.org.length ? (
             <CommandGroup heading="Organizasyon">
               {data.org.map((r) => (
-                <CommandItem key={r.id} value={r.id} onSelect={() => go(r.to)}>
+                <CommandItem key={r.id} value={`${r.label} ${r.hint} ${r.id}`} onSelect={() => go(r.to)}>
                   <span>{r.label}</span>
                   <span className="ml-auto text-xs text-muted-foreground">{r.hint}</span>
                 </CommandItem>
