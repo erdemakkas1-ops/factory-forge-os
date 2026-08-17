@@ -112,7 +112,7 @@ export function GlobalSearch() {
         <kbd className="ml-auto hidden rounded border px-1.5 text-[10px] lg:inline">⌘K</kbd>
       </Button>
 
-      <CommandDialog open={open} onOpenChange={setOpen} shouldFilter={false}>
+      <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandInput
           value={term}
           onValueChange={setTerm}
