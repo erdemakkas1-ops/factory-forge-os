@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as GirisRouteImport } from './routes/giris'
+import { Route as AuthenticatedOrganizasyonRouteImport } from './routes/_authenticated/organizasyon'
 import { Route as AuthenticatedPanelRouteImport } from './routes/_authenticated/panel'
 
 const IndexRoute = IndexRouteImport.update({
@@ -28,6 +29,12 @@ const GirisRoute = GirisRouteImport.update({
   path: '/giris',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedOrganizasyonRoute =
+  AuthenticatedOrganizasyonRouteImport.update({
+    id: '/organizasyon',
+    path: '/organizasyon',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedPanelRoute = AuthenticatedPanelRouteImport.update({
   id: '/panel',
   path: '/panel',
@@ -37,11 +44,13 @@ const AuthenticatedPanelRoute = AuthenticatedPanelRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/giris': typeof GirisRoute
+  '/organizasyon': typeof AuthenticatedOrganizasyonRoute
   '/panel': typeof AuthenticatedPanelRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/giris': typeof GirisRoute
+  '/organizasyon': typeof AuthenticatedOrganizasyonRoute
   '/panel': typeof AuthenticatedPanelRoute
 }
 export interface FileRoutesById {
@@ -49,14 +58,21 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/giris': typeof GirisRoute
+  '/_authenticated/organizasyon': typeof AuthenticatedOrganizasyonRoute
   '/_authenticated/panel': typeof AuthenticatedPanelRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/giris' | '/panel'
+  fullPaths: '/' | '/giris' | '/organizasyon' | '/panel'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/giris' | '/panel'
-  id: '__root__' | '/' | '/_authenticated' | '/giris' | '/_authenticated/panel'
+  to: '/' | '/giris' | '/organizasyon' | '/panel'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/giris'
+    | '/_authenticated/organizasyon'
+    | '/_authenticated/panel'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -88,6 +104,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GirisRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/organizasyon': {
+      id: '/_authenticated/organizasyon'
+      path: '/organizasyon'
+      fullPath: '/organizasyon'
+      preLoaderRoute: typeof AuthenticatedOrganizasyonRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/panel': {
       id: '/_authenticated/panel'
       path: '/panel'
@@ -99,10 +122,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedOrganizasyonRoute: typeof AuthenticatedOrganizasyonRoute
   AuthenticatedPanelRoute: typeof AuthenticatedPanelRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedOrganizasyonRoute: AuthenticatedOrganizasyonRoute,
   AuthenticatedPanelRoute: AuthenticatedPanelRoute,
 }
 
