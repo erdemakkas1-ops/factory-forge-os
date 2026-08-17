@@ -4,8 +4,8 @@ export function PageHeader({
   actions,
 }: {
   title: string;
-  description?: string;
-  actions?: React.ReactNode;
+  description?: string | undefined;
+  actions?: React.ReactNode | undefined;
 }) {
   return (
     <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">

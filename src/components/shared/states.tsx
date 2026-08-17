@@ -28,8 +28,8 @@ export function EmptyState({
   action,
 }: {
   title: string;
-  description?: string;
-  action?: React.ReactNode;
+  description?: string | undefined;
+  action?: React.ReactNode | undefined;
 }) {
   return (
     <div className="flex flex-col items-center justify-center gap-3 px-6 py-16 text-center">
@@ -47,7 +47,7 @@ export function EmptyState({
   );
 }
 
-export function ErrorState({ message, onRetry }: { message?: string; onRetry?: () => void }) {
+export function ErrorState({ message, onRetry }: { message?: string | undefined; onRetry?: (() => void) | undefined }) {
   return (
     <div className="flex flex-col items-center justify-center gap-3 px-6 py-16 text-center">
       <div className="flex size-11 items-center justify-center rounded-full bg-destructive/12 text-destructive">
