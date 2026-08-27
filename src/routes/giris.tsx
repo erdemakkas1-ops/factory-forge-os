@@ -5,10 +5,10 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
+import { KvkkNotices } from "@/components/legal/kvkk-notices";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
 import { friendlyError } from "@/lib/permissions";
 
@@ -45,31 +45,48 @@ function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [remember, setRemember] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  const [signupEmail, setSignupEmail] = useState("");
-  const [signupPassword, setSignupPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [recoveryMode, setRecoveryMode] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [newPasswordAgain, setNewPasswordAgain] = useState("");
 
   useEffect(() => {
+    const { data: authListener } = supabase.auth.onAuthStateChange((event) => {
+      if (event === "PASSWORD_RECOVERY") setRecoveryMode(true);
+    });
     const stored = window.localStorage.getItem(REMEMBER_KEY);
     if (stored) {
       setEmail(stored);
       setRemember(true);
     }
     void supabase.auth.getSession().then(({ data }) => {
-      if (data.session) void navigate({ to: redirect ?? "/panel" });
+      const recoveryLink = window.location.hash.includes("type=recovery");
+      if (recoveryLink) setRecoveryMode(true);
+      else if (data.session) void navigate({ to: redirect ?? "/panel" });
     });
+    return () => authListener.subscription.unsubscribe();
   }, [navigate, redirect]);
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email.trim(),
+      password,
+    });
     setLoading(false);
 
     if (error) {
       toast.error(friendlyError(error));
+      return;
+    }
+    const { data: profile, error: profileError } = await supabase
+      .from("profiles")
+      .select("is_active")
+      .eq("id", data.user.id)
+      .maybeSingle();
+    if (!profileError && profile?.is_active === false) {
+      await supabase.auth.signOut();
+      toast.error("Hesabınız pasif durumda. Sistem yöneticinizle iletişime geçin.");
       return;
     }
     if (remember) window.localStorage.setItem(REMEMBER_KEY, email.trim());
@@ -77,31 +94,6 @@ function LoginPage() {
 
     toast.success("Giriş başarılı, hoş geldiniz.");
     void navigate({ to: redirect ?? "/panel" });
-  }
-
-  async function handleSignup(e: React.FormEvent) {
-    e.preventDefault();
-    setLoading(true);
-    const { data, error } = await supabase.auth.signUp({
-      email: signupEmail.trim(),
-      password: signupPassword,
-      options: {
-        emailRedirectTo: `${window.location.origin}/panel`,
-        data: { first_name: firstName.trim(), last_name: lastName.trim() },
-      },
-    });
-    setLoading(false);
-
-    if (error) {
-      toast.error(friendlyError(error));
-      return;
-    }
-    if (data.session) {
-      toast.success("Hesabınız oluşturuldu.");
-      void navigate({ to: "/panel" });
-      return;
-    }
-    toast.success("Hesap oluşturuldu. E-postanızdaki doğrulama bağlantısına tıklayın.");
   }
 
   async function handleReset() {
@@ -114,6 +106,30 @@ function LoginPage() {
     });
     if (error) toast.error(friendlyError(error));
     else toast.success("Parola sıfırlama bağlantısı e-postanıza gönderildi.");
+  }
+
+  async function handlePasswordUpdate(e: React.FormEvent) {
+    e.preventDefault();
+    if (newPassword.length < 8) {
+      toast.error("Yeni parola en az 8 karakter olmalıdır.");
+      return;
+    }
+    if (newPassword !== newPasswordAgain) {
+      toast.error("Yeni parolalar birbiriyle eşleşmiyor.");
+      return;
+    }
+    setLoading(true);
+    const { error } = await supabase.auth.updateUser({ password: newPassword });
+    setLoading(false);
+    if (error) {
+      toast.error(friendlyError(error));
+      return;
+    }
+    await supabase.auth.signOut();
+    setRecoveryMode(false);
+    setNewPassword("");
+    setNewPasswordAgain("");
+    toast.success("Parolanız güncellendi. Yeni parolanızla giriş yapabilirsiniz.");
   }
 
   return (
@@ -132,8 +148,8 @@ function LoginPage() {
             Üretim, stok ve personel operasyonlarınız tek merkezde.
           </h2>
           <p className="text-sm text-sidebar-foreground/70">
-            Sipariş girişinden üretim emrine, birim görev atamalarından stok hareketlerine kadar
-            tüm fabrika süreçlerini rol bazlı yetkilerle yönetin.
+            Sipariş girişinden üretim emrine, birim görev atamalarından stok hareketlerine kadar tüm
+            fabrika süreçlerini rol bazlı yetkilerle yönetin.
           </p>
           <ul className="space-y-2 text-sm text-sidebar-foreground/70">
             <li>• Rol ve izin tabanlı erişim kontrolü</li>
@@ -155,21 +171,47 @@ function LoginPage() {
             <span className="font-display font-semibold">FABRİKA YÖNETİM SİSTEMİ</span>
           </div>
 
-          <Tabs defaultValue="login">
-            <TabsList className="mb-6 w-full">
-              <TabsTrigger value="login" className="flex-1">
-                Giriş Yap
-              </TabsTrigger>
-              <TabsTrigger value="signup" className="flex-1">
-                Hesap Oluştur
-              </TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="login">
-              <h1 className="text-xl font-semibold">Sisteme giriş</h1>
-              <p className="mt-1 mb-6 text-sm text-muted-foreground">
-                Kurumsal e-posta adresiniz ve parolanızla giriş yapın.
-              </p>
+          <div>
+            <h1 className="text-xl font-semibold">
+              {recoveryMode ? "Yeni parola belirle" : "Sisteme giriş"}
+            </h1>
+            <p className="mt-1 mb-6 text-sm text-muted-foreground">
+              {recoveryMode
+                ? "Hesabınız için yeni ve güçlü bir parola oluşturun."
+                : "Kurumsal e-posta adresiniz ve parolanızla giriş yapın."}
+            </p>
+            {recoveryMode ? (
+              <form onSubmit={handlePasswordUpdate} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="new-password">Yeni parola</Label>
+                  <Input
+                    id="new-password"
+                    type="password"
+                    autoComplete="new-password"
+                    required
+                    minLength={8}
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="new-password-again">Yeni parola tekrar</Label>
+                  <Input
+                    id="new-password-again"
+                    type="password"
+                    autoComplete="new-password"
+                    required
+                    minLength={8}
+                    value={newPasswordAgain}
+                    onChange={(e) => setNewPasswordAgain(e.target.value)}
+                  />
+                </div>
+                <Button type="submit" className="w-full" disabled={loading}>
+                  {loading ? <Loader2 className="mr-2 size-4 animate-spin" /> : null}
+                  Parolayı güncelle
+                </Button>
+              </form>
+            ) : (
               <form onSubmit={handleLogin} className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="email">E-posta</Label>
@@ -207,10 +249,7 @@ function LoginPage() {
                 </div>
                 <div className="flex items-center justify-between">
                   <label className="flex items-center gap-2 text-sm">
-                    <Checkbox
-                      checked={remember}
-                      onCheckedChange={(v) => setRemember(v === true)}
-                    />
+                    <Checkbox checked={remember} onCheckedChange={(v) => setRemember(v === true)} />
                     Beni hatırla
                   </label>
                   <button
@@ -226,64 +265,9 @@ function LoginPage() {
                   Giriş yap
                 </Button>
               </form>
-            </TabsContent>
-
-            <TabsContent value="signup">
-              <h1 className="text-xl font-semibold">Hesap oluştur</h1>
-              <p className="mt-1 mb-6 text-sm text-muted-foreground">
-                Sistemdeki ilk hesap otomatik olarak Admin yetkisi alır. Sonraki hesaplar
-                Personel olarak açılır ve Admin tarafından yetkilendirilir.
-              </p>
-              <form onSubmit={handleSignup} className="space-y-4">
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="space-y-2">
-                    <Label htmlFor="first-name">Ad</Label>
-                    <Input
-                      id="first-name"
-                      required
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="last-name">Soyad</Label>
-                    <Input
-                      id="last-name"
-                      required
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                    />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="signup-email">E-posta</Label>
-                  <Input
-                    id="signup-email"
-                    type="email"
-                    required
-                    value={signupEmail}
-                    onChange={(e) => setSignupEmail(e.target.value)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="signup-password">Parola</Label>
-                  <Input
-                    id="signup-password"
-                    type="password"
-                    required
-                    minLength={6}
-                    autoComplete="new-password"
-                    value={signupPassword}
-                    onChange={(e) => setSignupPassword(e.target.value)}
-                  />
-                </div>
-                <Button type="submit" className="w-full" disabled={loading}>
-                  {loading ? <Loader2 className="mr-2 size-4 animate-spin" /> : null}
-                  Hesap oluştur
-                </Button>
-              </form>
-            </TabsContent>
-          </Tabs>
+            )}
+            <KvkkNotices />
+          </div>
         </div>
       </div>
     </div>

@@ -1,0 +1,28 @@
+name: Windows Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run test
+      - run: npm run lint
+      - name: Build and publish Windows update
+        run: npm run release:win
+        env:
+          # Release deposu kaynak kod deposundan farklı olduğu için
+          # factory-forge-os-releases erişimli bir fine-grained PAT gerekir.
+          GH_TOKEN: ${{ secrets.RELEASE_GH_TOKEN }}

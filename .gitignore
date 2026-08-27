@@ -7,18 +7,46 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-.output
+node_modules/
+dist/
+dist-ssr/
+.output/
+release/
+release-fixed/
+release-ready/
 .vinxi
 .tanstack/**
 .nitro
 *.local
 
+# Local environment files and runtime secrets
+.env
+.env.*
+!.env.example
+
+# Private keys, certificates, credentials and local databases
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.sqlite
+*.sqlite3
+credentials*.json
+service-account*.json
+
 # Wrangler / Cloudflare
 .wrangler/
 .dev.vars
+supabase/.temp/
+**/supabase/.temp/
+supabase-migrate-test/
+
+# Local security/tooling state
+.mcp.json
+.cursor/
+.lovable/
 
 # Editor directories and files
 .vscode/*

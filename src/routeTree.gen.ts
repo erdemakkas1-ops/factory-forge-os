@@ -12,10 +12,32 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as GirisRouteImport } from './routes/giris'
+import { Route as AuthenticatedArizalarRouteImport } from './routes/_authenticated/arizalar'
+import { Route as AuthenticatedAyarlarRouteImport } from './routes/_authenticated/ayarlar'
+import { Route as AuthenticatedBakimIsEmirleriRouteImport } from './routes/_authenticated/bakim-is-emirleri'
+import { Route as AuthenticatedDenetimRouteImport } from './routes/_authenticated/denetim'
+import { Route as AuthenticatedDepoKonumlariRouteImport } from './routes/_authenticated/depo-konumlari'
+import { Route as AuthenticatedDepolarRouteImport } from './routes/_authenticated/depolar'
+import { Route as AuthenticatedKategorilerRouteImport } from './routes/_authenticated/kategoriler'
+import { Route as AuthenticatedMakinelerRouteImport } from './routes/_authenticated/makineler'
 import { Route as AuthenticatedOrganizasyonRouteImport } from './routes/_authenticated/organizasyon'
 import { Route as AuthenticatedPanelRouteImport } from './routes/_authenticated/panel'
+import { Route as AuthenticatedPeriyodikBakimRouteImport } from './routes/_authenticated/periyodik-bakim'
 import { Route as AuthenticatedPersonelRouteImport } from './routes/_authenticated/personel'
 import { Route as AuthenticatedProfilRouteImport } from './routes/_authenticated/profil'
+import { Route as AuthenticatedRecetelerRouteImport } from './routes/_authenticated/receteler'
+import { Route as AuthenticatedSatinalmaSiparisleriRouteImport } from './routes/_authenticated/satinalma-siparisleri'
+import { Route as AuthenticatedStokRouteImport } from './routes/_authenticated/stok'
+import { Route as AuthenticatedStokCikisiRouteImport } from './routes/_authenticated/stok-cikisi'
+import { Route as AuthenticatedStokGirisiRouteImport } from './routes/_authenticated/stok-girisi'
+import { Route as AuthenticatedStokHareketleriRouteImport } from './routes/_authenticated/stok-hareketleri'
+import { Route as AuthenticatedStokTransferRouteImport } from './routes/_authenticated/stok-transfer'
+import { Route as AuthenticatedTedarikcilerRouteImport } from './routes/_authenticated/tedarikciler'
+import { Route as AuthenticatedUretimEmirleriRouteImport } from './routes/_authenticated/uretim-emirleri'
+import { Route as AuthenticatedUretimRaporlariRouteImport } from './routes/_authenticated/uretim-raporlari'
+import { Route as AuthenticatedUrunlerRouteImport } from './routes/_authenticated/urunler'
+import { Route as AuthenticatedYetkilendirmeRouteImport } from './routes/_authenticated/yetkilendirme'
+import { Route as AuthenticatedUretimEmirleriOrderIdRouteImport } from './routes/_authenticated/uretim-emirleri.$orderId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -31,6 +53,49 @@ const GirisRoute = GirisRouteImport.update({
   path: '/giris',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedArizalarRoute = AuthenticatedArizalarRouteImport.update({
+  id: '/arizalar',
+  path: '/arizalar',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAyarlarRoute = AuthenticatedAyarlarRouteImport.update({
+  id: '/ayarlar',
+  path: '/ayarlar',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedBakimIsEmirleriRoute =
+  AuthenticatedBakimIsEmirleriRouteImport.update({
+    id: '/bakim-is-emirleri',
+    path: '/bakim-is-emirleri',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDenetimRoute = AuthenticatedDenetimRouteImport.update({
+  id: '/denetim',
+  path: '/denetim',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDepoKonumlariRoute =
+  AuthenticatedDepoKonumlariRouteImport.update({
+    id: '/depo-konumlari',
+    path: '/depo-konumlari',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDepolarRoute = AuthenticatedDepolarRouteImport.update({
+  id: '/depolar',
+  path: '/depolar',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedKategorilerRoute =
+  AuthenticatedKategorilerRouteImport.update({
+    id: '/kategoriler',
+    path: '/kategoriler',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedMakinelerRoute = AuthenticatedMakinelerRouteImport.update({
+  id: '/makineler',
+  path: '/makineler',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedOrganizasyonRoute =
   AuthenticatedOrganizasyonRouteImport.update({
     id: '/organizasyon',
@@ -42,6 +107,12 @@ const AuthenticatedPanelRoute = AuthenticatedPanelRouteImport.update({
   path: '/panel',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedPeriyodikBakimRoute =
+  AuthenticatedPeriyodikBakimRouteImport.update({
+    id: '/periyodik-bakim',
+    path: '/periyodik-bakim',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedPersonelRoute = AuthenticatedPersonelRouteImport.update({
   id: '/personel',
   path: '/personel',
@@ -52,48 +123,264 @@ const AuthenticatedProfilRoute = AuthenticatedProfilRouteImport.update({
   path: '/profil',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedRecetelerRoute = AuthenticatedRecetelerRouteImport.update({
+  id: '/receteler',
+  path: '/receteler',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSatinalmaSiparisleriRoute =
+  AuthenticatedSatinalmaSiparisleriRouteImport.update({
+    id: '/satinalma-siparisleri',
+    path: '/satinalma-siparisleri',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedStokRoute = AuthenticatedStokRouteImport.update({
+  id: '/stok',
+  path: '/stok',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedStokCikisiRoute = AuthenticatedStokCikisiRouteImport.update({
+  id: '/stok-cikisi',
+  path: '/stok-cikisi',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedStokGirisiRoute = AuthenticatedStokGirisiRouteImport.update({
+  id: '/stok-girisi',
+  path: '/stok-girisi',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedStokHareketleriRoute =
+  AuthenticatedStokHareketleriRouteImport.update({
+    id: '/stok-hareketleri',
+    path: '/stok-hareketleri',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedStokTransferRoute =
+  AuthenticatedStokTransferRouteImport.update({
+    id: '/stok-transfer',
+    path: '/stok-transfer',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedTedarikcilerRoute =
+  AuthenticatedTedarikcilerRouteImport.update({
+    id: '/tedarikciler',
+    path: '/tedarikciler',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedUretimEmirleriRoute =
+  AuthenticatedUretimEmirleriRouteImport.update({
+    id: '/uretim-emirleri',
+    path: '/uretim-emirleri',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedUretimRaporlariRoute =
+  AuthenticatedUretimRaporlariRouteImport.update({
+    id: '/uretim-raporlari',
+    path: '/uretim-raporlari',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedUrunlerRoute = AuthenticatedUrunlerRouteImport.update({
+  id: '/urunler',
+  path: '/urunler',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedYetkilendirmeRoute =
+  AuthenticatedYetkilendirmeRouteImport.update({
+    id: '/yetkilendirme',
+    path: '/yetkilendirme',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedUretimEmirleriOrderIdRoute =
+  AuthenticatedUretimEmirleriOrderIdRouteImport.update({
+    id: '/$orderId',
+    path: '/$orderId',
+    getParentRoute: () => AuthenticatedUretimEmirleriRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/giris': typeof GirisRoute
+  '/arizalar': typeof AuthenticatedArizalarRoute
+  '/ayarlar': typeof AuthenticatedAyarlarRoute
+  '/bakim-is-emirleri': typeof AuthenticatedBakimIsEmirleriRoute
+  '/denetim': typeof AuthenticatedDenetimRoute
+  '/depo-konumlari': typeof AuthenticatedDepoKonumlariRoute
+  '/depolar': typeof AuthenticatedDepolarRoute
+  '/kategoriler': typeof AuthenticatedKategorilerRoute
+  '/makineler': typeof AuthenticatedMakinelerRoute
   '/organizasyon': typeof AuthenticatedOrganizasyonRoute
   '/panel': typeof AuthenticatedPanelRoute
+  '/periyodik-bakim': typeof AuthenticatedPeriyodikBakimRoute
   '/personel': typeof AuthenticatedPersonelRoute
   '/profil': typeof AuthenticatedProfilRoute
+  '/receteler': typeof AuthenticatedRecetelerRoute
+  '/satinalma-siparisleri': typeof AuthenticatedSatinalmaSiparisleriRoute
+  '/stok': typeof AuthenticatedStokRoute
+  '/stok-cikisi': typeof AuthenticatedStokCikisiRoute
+  '/stok-girisi': typeof AuthenticatedStokGirisiRoute
+  '/stok-hareketleri': typeof AuthenticatedStokHareketleriRoute
+  '/stok-transfer': typeof AuthenticatedStokTransferRoute
+  '/tedarikciler': typeof AuthenticatedTedarikcilerRoute
+  '/uretim-emirleri': typeof AuthenticatedUretimEmirleriRouteWithChildren
+  '/uretim-raporlari': typeof AuthenticatedUretimRaporlariRoute
+  '/urunler': typeof AuthenticatedUrunlerRoute
+  '/yetkilendirme': typeof AuthenticatedYetkilendirmeRoute
+  '/uretim-emirleri/$orderId': typeof AuthenticatedUretimEmirleriOrderIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/giris': typeof GirisRoute
+  '/arizalar': typeof AuthenticatedArizalarRoute
+  '/ayarlar': typeof AuthenticatedAyarlarRoute
+  '/bakim-is-emirleri': typeof AuthenticatedBakimIsEmirleriRoute
+  '/denetim': typeof AuthenticatedDenetimRoute
+  '/depo-konumlari': typeof AuthenticatedDepoKonumlariRoute
+  '/depolar': typeof AuthenticatedDepolarRoute
+  '/kategoriler': typeof AuthenticatedKategorilerRoute
+  '/makineler': typeof AuthenticatedMakinelerRoute
   '/organizasyon': typeof AuthenticatedOrganizasyonRoute
   '/panel': typeof AuthenticatedPanelRoute
+  '/periyodik-bakim': typeof AuthenticatedPeriyodikBakimRoute
   '/personel': typeof AuthenticatedPersonelRoute
   '/profil': typeof AuthenticatedProfilRoute
+  '/receteler': typeof AuthenticatedRecetelerRoute
+  '/satinalma-siparisleri': typeof AuthenticatedSatinalmaSiparisleriRoute
+  '/stok': typeof AuthenticatedStokRoute
+  '/stok-cikisi': typeof AuthenticatedStokCikisiRoute
+  '/stok-girisi': typeof AuthenticatedStokGirisiRoute
+  '/stok-hareketleri': typeof AuthenticatedStokHareketleriRoute
+  '/stok-transfer': typeof AuthenticatedStokTransferRoute
+  '/tedarikciler': typeof AuthenticatedTedarikcilerRoute
+  '/uretim-emirleri': typeof AuthenticatedUretimEmirleriRouteWithChildren
+  '/uretim-raporlari': typeof AuthenticatedUretimRaporlariRoute
+  '/urunler': typeof AuthenticatedUrunlerRoute
+  '/yetkilendirme': typeof AuthenticatedYetkilendirmeRoute
+  '/uretim-emirleri/$orderId': typeof AuthenticatedUretimEmirleriOrderIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/giris': typeof GirisRoute
+  '/_authenticated/arizalar': typeof AuthenticatedArizalarRoute
+  '/_authenticated/ayarlar': typeof AuthenticatedAyarlarRoute
+  '/_authenticated/bakim-is-emirleri': typeof AuthenticatedBakimIsEmirleriRoute
+  '/_authenticated/denetim': typeof AuthenticatedDenetimRoute
+  '/_authenticated/depo-konumlari': typeof AuthenticatedDepoKonumlariRoute
+  '/_authenticated/depolar': typeof AuthenticatedDepolarRoute
+  '/_authenticated/kategoriler': typeof AuthenticatedKategorilerRoute
+  '/_authenticated/makineler': typeof AuthenticatedMakinelerRoute
   '/_authenticated/organizasyon': typeof AuthenticatedOrganizasyonRoute
   '/_authenticated/panel': typeof AuthenticatedPanelRoute
+  '/_authenticated/periyodik-bakim': typeof AuthenticatedPeriyodikBakimRoute
   '/_authenticated/personel': typeof AuthenticatedPersonelRoute
   '/_authenticated/profil': typeof AuthenticatedProfilRoute
+  '/_authenticated/receteler': typeof AuthenticatedRecetelerRoute
+  '/_authenticated/satinalma-siparisleri': typeof AuthenticatedSatinalmaSiparisleriRoute
+  '/_authenticated/stok': typeof AuthenticatedStokRoute
+  '/_authenticated/stok-cikisi': typeof AuthenticatedStokCikisiRoute
+  '/_authenticated/stok-girisi': typeof AuthenticatedStokGirisiRoute
+  '/_authenticated/stok-hareketleri': typeof AuthenticatedStokHareketleriRoute
+  '/_authenticated/stok-transfer': typeof AuthenticatedStokTransferRoute
+  '/_authenticated/tedarikciler': typeof AuthenticatedTedarikcilerRoute
+  '/_authenticated/uretim-emirleri': typeof AuthenticatedUretimEmirleriRouteWithChildren
+  '/_authenticated/uretim-raporlari': typeof AuthenticatedUretimRaporlariRoute
+  '/_authenticated/urunler': typeof AuthenticatedUrunlerRoute
+  '/_authenticated/yetkilendirme': typeof AuthenticatedYetkilendirmeRoute
+  '/_authenticated/uretim-emirleri/$orderId': typeof AuthenticatedUretimEmirleriOrderIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/giris' | '/organizasyon' | '/panel' | '/personel' | '/profil'
+    | '/'
+    | '/giris'
+    | '/arizalar'
+    | '/ayarlar'
+    | '/bakim-is-emirleri'
+    | '/denetim'
+    | '/depo-konumlari'
+    | '/depolar'
+    | '/kategoriler'
+    | '/makineler'
+    | '/organizasyon'
+    | '/panel'
+    | '/periyodik-bakim'
+    | '/personel'
+    | '/profil'
+    | '/receteler'
+    | '/satinalma-siparisleri'
+    | '/stok'
+    | '/stok-cikisi'
+    | '/stok-girisi'
+    | '/stok-hareketleri'
+    | '/stok-transfer'
+    | '/tedarikciler'
+    | '/uretim-emirleri'
+    | '/uretim-raporlari'
+    | '/urunler'
+    | '/yetkilendirme'
+    | '/uretim-emirleri/$orderId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/giris' | '/organizasyon' | '/panel' | '/personel' | '/profil'
+  to:
+    | '/'
+    | '/giris'
+    | '/arizalar'
+    | '/ayarlar'
+    | '/bakim-is-emirleri'
+    | '/denetim'
+    | '/depo-konumlari'
+    | '/depolar'
+    | '/kategoriler'
+    | '/makineler'
+    | '/organizasyon'
+    | '/panel'
+    | '/periyodik-bakim'
+    | '/personel'
+    | '/profil'
+    | '/receteler'
+    | '/satinalma-siparisleri'
+    | '/stok'
+    | '/stok-cikisi'
+    | '/stok-girisi'
+    | '/stok-hareketleri'
+    | '/stok-transfer'
+    | '/tedarikciler'
+    | '/uretim-emirleri'
+    | '/uretim-raporlari'
+    | '/urunler'
+    | '/yetkilendirme'
+    | '/uretim-emirleri/$orderId'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/giris'
+    | '/_authenticated/arizalar'
+    | '/_authenticated/ayarlar'
+    | '/_authenticated/bakim-is-emirleri'
+    | '/_authenticated/denetim'
+    | '/_authenticated/depo-konumlari'
+    | '/_authenticated/depolar'
+    | '/_authenticated/kategoriler'
+    | '/_authenticated/makineler'
     | '/_authenticated/organizasyon'
     | '/_authenticated/panel'
+    | '/_authenticated/periyodik-bakim'
     | '/_authenticated/personel'
     | '/_authenticated/profil'
+    | '/_authenticated/receteler'
+    | '/_authenticated/satinalma-siparisleri'
+    | '/_authenticated/stok'
+    | '/_authenticated/stok-cikisi'
+    | '/_authenticated/stok-girisi'
+    | '/_authenticated/stok-hareketleri'
+    | '/_authenticated/stok-transfer'
+    | '/_authenticated/tedarikciler'
+    | '/_authenticated/uretim-emirleri'
+    | '/_authenticated/uretim-raporlari'
+    | '/_authenticated/urunler'
+    | '/_authenticated/yetkilendirme'
+    | '/_authenticated/uretim-emirleri/$orderId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -125,6 +412,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GirisRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/arizalar': {
+      id: '/_authenticated/arizalar'
+      path: '/arizalar'
+      fullPath: '/arizalar'
+      preLoaderRoute: typeof AuthenticatedArizalarRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/ayarlar': {
+      id: '/_authenticated/ayarlar'
+      path: '/ayarlar'
+      fullPath: '/ayarlar'
+      preLoaderRoute: typeof AuthenticatedAyarlarRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/bakim-is-emirleri': {
+      id: '/_authenticated/bakim-is-emirleri'
+      path: '/bakim-is-emirleri'
+      fullPath: '/bakim-is-emirleri'
+      preLoaderRoute: typeof AuthenticatedBakimIsEmirleriRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/denetim': {
+      id: '/_authenticated/denetim'
+      path: '/denetim'
+      fullPath: '/denetim'
+      preLoaderRoute: typeof AuthenticatedDenetimRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/depo-konumlari': {
+      id: '/_authenticated/depo-konumlari'
+      path: '/depo-konumlari'
+      fullPath: '/depo-konumlari'
+      preLoaderRoute: typeof AuthenticatedDepoKonumlariRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/depolar': {
+      id: '/_authenticated/depolar'
+      path: '/depolar'
+      fullPath: '/depolar'
+      preLoaderRoute: typeof AuthenticatedDepolarRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/kategoriler': {
+      id: '/_authenticated/kategoriler'
+      path: '/kategoriler'
+      fullPath: '/kategoriler'
+      preLoaderRoute: typeof AuthenticatedKategorilerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/makineler': {
+      id: '/_authenticated/makineler'
+      path: '/makineler'
+      fullPath: '/makineler'
+      preLoaderRoute: typeof AuthenticatedMakinelerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/organizasyon': {
       id: '/_authenticated/organizasyon'
       path: '/organizasyon'
@@ -137,6 +480,13 @@ declare module '@tanstack/react-router' {
       path: '/panel'
       fullPath: '/panel'
       preLoaderRoute: typeof AuthenticatedPanelRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/periyodik-bakim': {
+      id: '/_authenticated/periyodik-bakim'
+      path: '/periyodik-bakim'
+      fullPath: '/periyodik-bakim'
+      preLoaderRoute: typeof AuthenticatedPeriyodikBakimRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/personel': {
@@ -153,21 +503,171 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProfilRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/receteler': {
+      id: '/_authenticated/receteler'
+      path: '/receteler'
+      fullPath: '/receteler'
+      preLoaderRoute: typeof AuthenticatedRecetelerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/satinalma-siparisleri': {
+      id: '/_authenticated/satinalma-siparisleri'
+      path: '/satinalma-siparisleri'
+      fullPath: '/satinalma-siparisleri'
+      preLoaderRoute: typeof AuthenticatedSatinalmaSiparisleriRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/stok': {
+      id: '/_authenticated/stok'
+      path: '/stok'
+      fullPath: '/stok'
+      preLoaderRoute: typeof AuthenticatedStokRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/stok-cikisi': {
+      id: '/_authenticated/stok-cikisi'
+      path: '/stok-cikisi'
+      fullPath: '/stok-cikisi'
+      preLoaderRoute: typeof AuthenticatedStokCikisiRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/stok-girisi': {
+      id: '/_authenticated/stok-girisi'
+      path: '/stok-girisi'
+      fullPath: '/stok-girisi'
+      preLoaderRoute: typeof AuthenticatedStokGirisiRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/stok-hareketleri': {
+      id: '/_authenticated/stok-hareketleri'
+      path: '/stok-hareketleri'
+      fullPath: '/stok-hareketleri'
+      preLoaderRoute: typeof AuthenticatedStokHareketleriRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/stok-transfer': {
+      id: '/_authenticated/stok-transfer'
+      path: '/stok-transfer'
+      fullPath: '/stok-transfer'
+      preLoaderRoute: typeof AuthenticatedStokTransferRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/tedarikciler': {
+      id: '/_authenticated/tedarikciler'
+      path: '/tedarikciler'
+      fullPath: '/tedarikciler'
+      preLoaderRoute: typeof AuthenticatedTedarikcilerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/uretim-emirleri': {
+      id: '/_authenticated/uretim-emirleri'
+      path: '/uretim-emirleri'
+      fullPath: '/uretim-emirleri'
+      preLoaderRoute: typeof AuthenticatedUretimEmirleriRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/uretim-raporlari': {
+      id: '/_authenticated/uretim-raporlari'
+      path: '/uretim-raporlari'
+      fullPath: '/uretim-raporlari'
+      preLoaderRoute: typeof AuthenticatedUretimRaporlariRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/urunler': {
+      id: '/_authenticated/urunler'
+      path: '/urunler'
+      fullPath: '/urunler'
+      preLoaderRoute: typeof AuthenticatedUrunlerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/yetkilendirme': {
+      id: '/_authenticated/yetkilendirme'
+      path: '/yetkilendirme'
+      fullPath: '/yetkilendirme'
+      preLoaderRoute: typeof AuthenticatedYetkilendirmeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/uretim-emirleri/$orderId': {
+      id: '/_authenticated/uretim-emirleri/$orderId'
+      path: '/$orderId'
+      fullPath: '/uretim-emirleri/$orderId'
+      preLoaderRoute: typeof AuthenticatedUretimEmirleriOrderIdRouteImport
+      parentRoute: typeof AuthenticatedUretimEmirleriRoute
+    }
   }
 }
 
+interface AuthenticatedUretimEmirleriRouteChildren {
+  AuthenticatedUretimEmirleriOrderIdRoute: typeof AuthenticatedUretimEmirleriOrderIdRoute
+}
+
+const AuthenticatedUretimEmirleriRouteChildren: AuthenticatedUretimEmirleriRouteChildren =
+  {
+    AuthenticatedUretimEmirleriOrderIdRoute:
+      AuthenticatedUretimEmirleriOrderIdRoute,
+  }
+
+const AuthenticatedUretimEmirleriRouteWithChildren =
+  AuthenticatedUretimEmirleriRoute._addFileChildren(
+    AuthenticatedUretimEmirleriRouteChildren,
+  )
+
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedArizalarRoute: typeof AuthenticatedArizalarRoute
+  AuthenticatedAyarlarRoute: typeof AuthenticatedAyarlarRoute
+  AuthenticatedBakimIsEmirleriRoute: typeof AuthenticatedBakimIsEmirleriRoute
+  AuthenticatedDenetimRoute: typeof AuthenticatedDenetimRoute
+  AuthenticatedDepoKonumlariRoute: typeof AuthenticatedDepoKonumlariRoute
+  AuthenticatedDepolarRoute: typeof AuthenticatedDepolarRoute
+  AuthenticatedKategorilerRoute: typeof AuthenticatedKategorilerRoute
+  AuthenticatedMakinelerRoute: typeof AuthenticatedMakinelerRoute
   AuthenticatedOrganizasyonRoute: typeof AuthenticatedOrganizasyonRoute
   AuthenticatedPanelRoute: typeof AuthenticatedPanelRoute
+  AuthenticatedPeriyodikBakimRoute: typeof AuthenticatedPeriyodikBakimRoute
   AuthenticatedPersonelRoute: typeof AuthenticatedPersonelRoute
   AuthenticatedProfilRoute: typeof AuthenticatedProfilRoute
+  AuthenticatedRecetelerRoute: typeof AuthenticatedRecetelerRoute
+  AuthenticatedSatinalmaSiparisleriRoute: typeof AuthenticatedSatinalmaSiparisleriRoute
+  AuthenticatedStokRoute: typeof AuthenticatedStokRoute
+  AuthenticatedStokCikisiRoute: typeof AuthenticatedStokCikisiRoute
+  AuthenticatedStokGirisiRoute: typeof AuthenticatedStokGirisiRoute
+  AuthenticatedStokHareketleriRoute: typeof AuthenticatedStokHareketleriRoute
+  AuthenticatedStokTransferRoute: typeof AuthenticatedStokTransferRoute
+  AuthenticatedTedarikcilerRoute: typeof AuthenticatedTedarikcilerRoute
+  AuthenticatedUretimEmirleriRoute: typeof AuthenticatedUretimEmirleriRouteWithChildren
+  AuthenticatedUretimRaporlariRoute: typeof AuthenticatedUretimRaporlariRoute
+  AuthenticatedUrunlerRoute: typeof AuthenticatedUrunlerRoute
+  AuthenticatedYetkilendirmeRoute: typeof AuthenticatedYetkilendirmeRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedArizalarRoute: AuthenticatedArizalarRoute,
+  AuthenticatedAyarlarRoute: AuthenticatedAyarlarRoute,
+  AuthenticatedBakimIsEmirleriRoute: AuthenticatedBakimIsEmirleriRoute,
+  AuthenticatedDenetimRoute: AuthenticatedDenetimRoute,
+  AuthenticatedDepoKonumlariRoute: AuthenticatedDepoKonumlariRoute,
+  AuthenticatedDepolarRoute: AuthenticatedDepolarRoute,
+  AuthenticatedKategorilerRoute: AuthenticatedKategorilerRoute,
+  AuthenticatedMakinelerRoute: AuthenticatedMakinelerRoute,
   AuthenticatedOrganizasyonRoute: AuthenticatedOrganizasyonRoute,
   AuthenticatedPanelRoute: AuthenticatedPanelRoute,
+  AuthenticatedPeriyodikBakimRoute: AuthenticatedPeriyodikBakimRoute,
   AuthenticatedPersonelRoute: AuthenticatedPersonelRoute,
   AuthenticatedProfilRoute: AuthenticatedProfilRoute,
+  AuthenticatedRecetelerRoute: AuthenticatedRecetelerRoute,
+  AuthenticatedSatinalmaSiparisleriRoute:
+    AuthenticatedSatinalmaSiparisleriRoute,
+  AuthenticatedStokRoute: AuthenticatedStokRoute,
+  AuthenticatedStokCikisiRoute: AuthenticatedStokCikisiRoute,
+  AuthenticatedStokGirisiRoute: AuthenticatedStokGirisiRoute,
+  AuthenticatedStokHareketleriRoute: AuthenticatedStokHareketleriRoute,
+  AuthenticatedStokTransferRoute: AuthenticatedStokTransferRoute,
+  AuthenticatedTedarikcilerRoute: AuthenticatedTedarikcilerRoute,
+  AuthenticatedUretimEmirleriRoute:
+    AuthenticatedUretimEmirleriRouteWithChildren,
+  AuthenticatedUretimRaporlariRoute: AuthenticatedUretimRaporlariRoute,
+  AuthenticatedUrunlerRoute: AuthenticatedUrunlerRoute,
+  AuthenticatedYetkilendirmeRoute: AuthenticatedYetkilendirmeRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

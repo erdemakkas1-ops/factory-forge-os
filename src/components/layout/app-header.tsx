@@ -1,4 +1,6 @@
-import { Link } from "@tanstack/react-router";
+import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Bell, LogOut, Menu, Moon, PanelLeftClose, PanelLeftOpen, Sun, User } from "lucide-react";
 
 import { GlobalSearch } from "@/components/layout/global-search";
@@ -29,9 +31,20 @@ export function AppHeader({
   theme: Theme;
   onToggleTheme: () => void;
 }) {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const [signingOut, setSigningOut] = useState(false);
   const { profile, roles, user, signOut } = useAuth();
   const name = fullName(profile) || (user?.email ?? "Kullanıcı");
   const roleLabel = roles.length ? roles.map((r) => ROLE_LABELS[r]).join(", ") : "Rol atanmadı";
+
+  async function handleSignOut() {
+    if (signingOut) return;
+    setSigningOut(true);
+    await signOut();
+    queryClient.clear();
+    await navigate({ to: "/giris", search: {}, replace: true });
+  }
 
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center gap-2 border-b bg-background/95 px-3 backdrop-blur sm:px-5">
@@ -113,8 +126,9 @@ export function AppHeader({
               </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => void signOut()}>
-              <LogOut className="mr-2 size-4" /> Çıkış yap
+            <DropdownMenuItem disabled={signingOut} onClick={() => void handleSignOut()}>
+              <LogOut className="mr-2 size-4" />
+              {signingOut ? "Çıkış yapılıyor..." : "Çıkış yap"}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
